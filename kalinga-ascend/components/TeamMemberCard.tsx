@@ -39,7 +39,7 @@ export function TeamMemberCard({ name, role, contribution, delay = 0 }: TeamMemb
             className="group relative h-full"
         >
             {/* Glowing Connection Line (Visual Decoration) */}
-            <div className="absolute -top-4 left-1/2 w-px h-4 bg-gradient-to-b from-transparent to-white/20 group-hover:to-kalinga/50 transition-colors" />
+            <div className="absolute -top-4 left-1/2 w-px h-4 bg-linear-to-b from-transparent to-white/20 group-hover:to-kalinga/50 transition-colors" />
 
             <div className="h-full glass-panel p-6 border border-white/5 hover:border-kalinga/50 transition-colors duration-300 relative overflow-hidden flex flex-col items-center text-center">
 
