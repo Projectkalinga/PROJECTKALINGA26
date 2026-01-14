@@ -1,0 +1,73 @@
+@import "tailwindcss";
+@source "../components";
+
+@theme {
+  --font-heading: 'Outfit', sans-serif;
+  /* --font-mono is built-in but we can override or add --font-data */
+  --font-data: 'Space Mono', monospace;
+
+  /* Define Colors for Utility Generation */
+  --color-martian-red: #C1440E;
+  --color-martian-rust: #8B3209;
+
+  --color-accent-primary: #00FF7F;
+  /* Kalinga Green */
+  --color-accent-secondary: #FF4500;
+  /* Martian Regolith */
+
+  /* Aliases to match code usage */
+  --color-regolith: #FF4500;
+  --color-kalinga: #00FF7F;
+}
+
+/* Day/Night Theme Variables */
+:root {
+  /* Day Mode Defaults */
+  --bg-primary: #C1440E;
+  --bg-secondary: #8B3209;
+  --text-primary: #FFFFFF;
+  --panel-glass: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='night'] {
+  /* Night Mode Overrides */
+  --bg-primary: #0e100f;
+  --bg-secondary: #1a1c1b;
+  --text-primary: #E5E5E5;
+  --panel-glass: rgba(14, 16, 15, 0.6);
+}
+
+/* Base Styles */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Space Mono', monospace;
+  transition: background-color 0.5s ease;
+}
+
+/* Utilities */
+@layer utilities {
+  .glass-panel {
+    background: var(--panel-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+
+  .split-door-left,
+  .split-door-right {
+    position: fixed;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+    /* Ensure they are above everything except the button (z-10000) */
+    z-index: 9000;
+  }
+}
