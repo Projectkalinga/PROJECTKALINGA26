@@ -43,7 +43,7 @@ export default function Navbar() {
     // specifically for the "Dropdown Navigation List" (Mobile/Sidebar). 
     // I will retain the previous subset for Desktop to avoid overcrowding 
     // but ensure Mobile/Hamburger has ALL 14).
-    const desktopItems = NAV_LINKS.slice(0, 8); // Show top 8 on desktop
+    const desktopItems = NAV_LINKS.slice(0, 10); // Show top 10 on desktop (includes Team)
 
     return (
         <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-(--panel-glass) border-b border-(--border-color) transition-all duration-300">
