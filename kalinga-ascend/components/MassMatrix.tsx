@@ -97,64 +97,108 @@ export function MassMatrix() {
 
                 <div className="grid lg:grid-cols-3">
                     {/* Table Column */}
-                    <div className="lg:col-span-2 overflow-x-auto">
-                        <table className="w-full text-sm font-mono text-left">
-                            <thead>
-                                <tr className="bg-black/20 text-gray-500 text-xs uppercase tracking-wider">
-                                    <th className="p-4">Category</th>
-                                    <th className="p-4">Sub-System</th>
-                                    <th className="p-4">Component</th>
-                                    <th className="p-4 text-right">Mass (g)</th>
-                                    <th className="p-4 text-center">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-white/5">
-                                {uavData.map((cat, catIdx) => (
-                                    cat.items.map((item, itemIdx) => (
-                                        <motion.tr
-                                            key={`${cat.category}-${item.sub}`}
-                                            initial={{ opacity: 0, x: -10 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: (catIdx * 0.1) + (itemIdx * 0.05) }}
-                                            className="hover:bg-white/5 transition-colors cursor-default group"
-                                            onMouseEnter={() => setHoveredItem(item.sub)}
-                                            onMouseLeave={() => setHoveredItem(null)}
-                                        >
-                                            {itemIdx === 0 && (
-                                                <td className="p-4 text-gray-400 font-bold border-r border-white/5" rowSpan={cat.items.length}>
-                                                    {cat.category}
-                                                </td>
-                                            )}
-                                            <td className="p-4 text-gray-300 group-hover:text-white transition-colors">{item.sub}</td>
-                                            <td className="p-4 text-gray-400 group-hover:text-white transition-colors">{item.component}</td>
-                                            <td className="p-4 text-right font-mono text-kalinga group-hover:text-green-400 font-bold transition-colors">
-                                                {item.mass}g
-                                            </td>
-                                            <td className="p-4 text-center">
-                                                <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded text-gray-400 border border-white/10 group-hover:border-kalinga group-hover:text-kalinga transition-all">
-                                                    {item.status}
-                                                </span>
-                                            </td>
-                                        </motion.tr>
-                                    ))
-                                ))}
-                            </tbody>
-                            <tfoot className="bg-white/5 font-bold">
-                                <tr>
-                                    <td colSpan={3} className="p-4 text-right text-gray-400 uppercase tracking-widest">Current MTOW</td>
-                                    <td className={`p-4 text-right text-xl ${totalMass < 2000 ? 'text-kalinga' : 'text-red-500'}`}>
+                    {/* Table Column - Responsive Switch */}
+                    <div className="lg:col-span-2">
+
+                        {/* Mobile: Card Stack View */}
+                        <div className="md:hidden space-y-4">
+                            {uavData.map((cat, catIdx) => (
+                                <div key={cat.category} className="space-y-2">
+                                    <h4 className="text-xs font-mono text-regolith uppercase tracking-wider pl-1">{cat.category}</h4>
+                                    <div className="flex overflow-x-auto gap-3 pb-2 snap-x snap-mandatory hide-scrollbar">
+                                        {cat.items.map((item, itemIdx) => (
+                                            <div
+                                                key={item.sub}
+                                                className="snap-center shrink-0 w-[240px] bg-white/5 border border-white/10 rounded-lg p-3 flex flex-col gap-2"
+                                            >
+                                                <div className="flex justify-between items-start">
+                                                    <span className="text-xs font-bold text-white leading-tight">{item.component}</span>
+                                                    <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-kalinga border border-white/5">
+                                                        {item.status}
+                                                    </span>
+                                                </div>
+                                                <div className="flex justify-between items-end mt-auto">
+                                                    <span className="text-[10px] text-gray-500">{item.sub}</span>
+                                                    <span className="text-sm font-mono font-bold text-kalinga">{item.mass}g</span>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                            <div className="mt-4 p-3 bg-white/5 rounded border border-white/10 flex justify-between items-center">
+                                <span className="text-xs font-mono text-gray-400">TOTAL MTOW</span>
+                                <div className="text-right">
+                                    <div className={`text-lg font-bold font-mono ${totalMass < 2000 ? 'text-kalinga' : 'text-red-500'}`}>
                                         {totalMass}g
-                                    </td>
-                                    <td className="p-4 text-center">
-                                        {totalMass < 2000 && (
-                                            <span className="px-2 py-1 bg-green-900/40 text-green-400 text-xs rounded border border-green-500/30">
-                                                PASSED
-                                            </span>
-                                        )}
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                                    </div>
+                                    <div className="text-[10px] text-gray-500">
+                                        {totalMass < 2000 ? 'WITHIN LIMITS' : 'OVERWEIGHT'}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Desktop: Table View */}
+                        <div className="hidden md:block overflow-x-auto">
+                            <table className="w-full text-sm font-mono text-left">
+                                <thead>
+                                    <tr className="bg-black/20 text-gray-500 text-xs uppercase tracking-wider">
+                                        <th className="p-4">Category</th>
+                                        <th className="p-4">Sub-System</th>
+                                        <th className="p-4">Component</th>
+                                        <th className="p-4 text-right">Mass (g)</th>
+                                        <th className="p-4 text-center">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-white/5">
+                                    {uavData.map((cat, catIdx) => (
+                                        cat.items.map((item, itemIdx) => (
+                                            <motion.tr
+                                                key={`${cat.category}-${item.sub}`}
+                                                initial={{ opacity: 0, x: -10 }}
+                                                whileInView={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: (catIdx * 0.1) + (itemIdx * 0.05) }}
+                                                className="hover:bg-white/5 transition-colors cursor-default group"
+                                                onMouseEnter={() => setHoveredItem(item.sub)}
+                                                onMouseLeave={() => setHoveredItem(null)}
+                                            >
+                                                {itemIdx === 0 && (
+                                                    <td className="p-4 text-gray-400 font-bold border-r border-white/5" rowSpan={cat.items.length}>
+                                                        {cat.category}
+                                                    </td>
+                                                )}
+                                                <td className="p-4 text-gray-300 group-hover:text-white transition-colors">{item.sub}</td>
+                                                <td className="p-4 text-gray-400 group-hover:text-white transition-colors">{item.component}</td>
+                                                <td className="p-4 text-right font-mono text-kalinga group-hover:text-green-400 font-bold transition-colors">
+                                                    {item.mass}g
+                                                </td>
+                                                <td className="p-4 text-center">
+                                                    <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded text-gray-400 border border-white/10 group-hover:border-kalinga group-hover:text-kalinga transition-all">
+                                                        {item.status}
+                                                    </span>
+                                                </td>
+                                            </motion.tr>
+                                        ))
+                                    ))}
+                                </tbody>
+                                <tfoot className="bg-white/5 font-bold">
+                                    <tr>
+                                        <td colSpan={3} className="p-4 text-right text-gray-400 uppercase tracking-widest">Current MTOW</td>
+                                        <td className={`p-4 text-right text-xl ${totalMass < 2000 ? 'text-kalinga' : 'text-red-500'}`}>
+                                            {totalMass}g
+                                        </td>
+                                        <td className="p-4 text-center">
+                                            {totalMass < 2000 && (
+                                                <span className="px-2 py-1 bg-green-900/40 text-green-400 text-xs rounded border border-green-500/30">
+                                                    PASSED
+                                                </span>
+                                            )}
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
 
                     {/* Interactive Silhouette Column (Visual Feedback) */}

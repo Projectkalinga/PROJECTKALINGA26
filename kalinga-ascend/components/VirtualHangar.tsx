@@ -5,6 +5,7 @@ import { useGLTF, Stage, OrbitControls, Html } from '@react-three/drei';
 import { useState, useRef, Suspense } from 'react';
 import * as THREE from 'three';
 import { Box, Layers } from 'lucide-react';
+import { useTheme } from '@/components/ThemeProvider';
 
 function Model({ url, slope, setHoveredComponent, type }: { url: string; slope: number; setHoveredComponent: (s: string | null) => void, type: 'UAV' | 'BASE_STATION' }) {
     const { scene } = useGLTF(url);
@@ -76,31 +77,41 @@ export default function VirtualHangar() {
     const [slope, setSlope] = useState(0);
     const [hoveredComponent, setHoveredComponent] = useState<string | null>(null);
     const [activeModel, setActiveModel] = useState<'UAV' | 'BASE_STATION'>('UAV');
+    const { theme } = useTheme();
+
+    // Determine if we are in dark mode for 3D environment logic
+    const isDark = theme === 'dark';
 
     return (
-        <div className="w-full h-full relative bg-[#0e100f]">
+        <div className={`w-full h-full relative transition-colors duration-500 bg-(--bg-primary)`}>
             {/* Tech Overlay */}
             <div className="absolute top-20 left-8 z-10 pointer-events-none">
-                <h2 className="text-4xl font-heading text-white">VIRTUAL HANGAR</h2>
+                <h2 className={`text-4xl font-heading text-(--text-primary) transition-colors`}>VIRTUAL HANGAR</h2>
                 <div className="flex items-center gap-2 mt-2">
                     <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    <span className="text-xs font-mono text-accent-primary">LIVE RENDERING: {activeModel}</span>
+                    <span className="text-xs font-mono text-(--accent-glow)">LIVE RENDERING: {activeModel}</span>
                 </div>
             </div>
 
             {/* Model Selector */}
             <div className="absolute top-20 right-8 z-10 flex flex-col gap-2">
-                <label className="text-xs font-mono text-gray-500 text-right">SELECT VIEW</label>
+                <label className={`text-xs font-mono text-right text-(--text-secondary) transition-colors`}>SELECT VIEW</label>
                 <div className="flex gap-2">
                     <button
                         onClick={() => setActiveModel('UAV')}
-                        className={`px-4 py-2 rounded border flex items-center gap-2 text-xs font-bold font-mono transition-colors ${activeModel === 'UAV' ? 'bg-kalinga text-black border-kalinga' : 'bg-black/50 text-gray-400 border-white/20 hover:border-white/50'}`}
+                        className={`px-4 py-2 rounded border flex items-center gap-2 text-xs font-bold font-mono transition-colors 
+                                    ${activeModel === 'UAV'
+                                ? 'bg-(--accent-glow) text-(--bg-primary) border-(--accent-glow)'
+                                : 'bg-(--panel-glass) text-(--text-secondary) border-(--border-color) hover:border-(--text-primary)'}`}
                     >
                         <Box size={14} /> UAV
                     </button>
                     <button
                         onClick={() => setActiveModel('BASE_STATION')}
-                        className={`px-4 py-2 rounded border flex items-center gap-2 text-xs font-bold font-mono transition-colors ${activeModel === 'BASE_STATION' ? 'bg-kalinga text-black border-kalinga' : 'bg-black/50 text-gray-400 border-white/20 hover:border-white/50'}`}
+                        className={`px-4 py-2 rounded border flex items-center gap-2 text-xs font-bold font-mono transition-colors 
+                                    ${activeModel === 'BASE_STATION'
+                                ? 'bg-(--accent-glow) text-(--bg-primary) border-(--accent-glow)'
+                                : 'bg-(--panel-glass) text-(--text-secondary) border-(--border-color) hover:border-(--text-primary)'}`}
                     >
                         <Layers size={14} /> Z-DBS
                     </button>
@@ -108,8 +119,8 @@ export default function VirtualHangar() {
             </div>
 
             {/* Controls */}
-            <div className="absolute bottom-20 right-8 z-10 w-64 glass-panel p-6">
-                <label className="text-xs font-mono text-gray-400 block mb-2">TERRAIN SLOPE SIMULATION: {slope}°</label>
+            <div className="absolute bottom-20 right-8 z-10 w-64 glass-panel p-6 bg-(--panel-glass) border-(--border-color)">
+                <label className={`text-xs font-mono block mb-2 text-(--text-secondary)`}>TERRAIN SLOPE SIMULATION: {slope}°</label>
                 <input
                     type="range"
                     min="0"
@@ -117,13 +128,19 @@ export default function VirtualHangar() {
                     step="0.1"
                     value={slope}
                     onChange={(e) => setSlope(parseFloat(e.target.value))}
-                    className="w-full accent-[#FF4500]"
+                    className="w-full accent-(--accent-glow)"
                 />
             </div>
 
             <Canvas shadows dpr={[1, 2]} camera={{ fov: 50, position: [5, 5, 5] }}>
-                <Suspense fallback={<Html center><div className="text-white font-mono animate-pulse">LOADING 3D ASSETS...</div></Html>}>
-                    <Stage environment="city" intensity={0.5} adjustCamera={true}>
+                {/* Adjust environment based on theme: 'city' for Dark (Contrast), 'studio' for Day (Soft/Bright) */}
+                <Suspense fallback={<Html center><div className={`font-mono animate-pulse text-(--text-primary)`}>LOADING 3D ASSETS...</div></Html>}>
+                    <Stage
+                        environment={isDark ? "city" : "studio"}
+                        intensity={isDark ? 0.5 : 1} // Brighter in day mode
+                        adjustCamera={true}
+                        shadows={{ type: 'contact', opacity: 0.5, blur: 3 }} // Soft shadows
+                    >
                         <Model
                             url={activeModel === 'UAV' ? "/models/quadcopter.glb" : "/models/base-station.glb"}
                             slope={slope}
@@ -138,9 +155,9 @@ export default function VirtualHangar() {
             {/* Tooltip Overlay */}
             {hoveredComponent && (
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20">
-                    <div className="glass-panel p-4 border-l-4 border-accent-secondary backdrop-blur-md">
-                        <h3 className="font-heading text-lg text-white">{hoveredComponent}</h3>
-                        <p className="text-xs font-mono text-gray-400">STATUS: NOMINAL</p>
+                    <div className="glass-panel p-4 border-l-4 border-(--accent-glow) backdrop-blur-md bg-(--panel-glass)">
+                        <h3 className={`font-heading text-lg text-(--text-primary)`}>{hoveredComponent}</h3>
+                        <p className={`text-xs font-mono text-(--text-secondary)`}>STATUS: NOMINAL</p>
                     </div>
                 </div>
             )}

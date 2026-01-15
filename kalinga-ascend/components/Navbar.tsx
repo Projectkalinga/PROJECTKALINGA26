@@ -4,10 +4,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { clsx } from 'clsx';
-import { Sun, Moon } from 'lucide-react';
-import { useTheme } from './ClientLayout';
+// import { Sun, Moon } from 'lucide-react'; // Moved to ThemeToggle
+import { useTheme } from '@/components/ThemeProvider';
 import { useMission } from '@/context/MissionContext';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import MobileNav from './MobileNav';
+import ThemeToggle from './ThemeToggle';
 
 const navItems = [
     { name: 'MISSION OVERVIEW', href: '/mission' },
@@ -25,19 +27,30 @@ const navItems = [
 
 export default function Navbar() {
     const pathname = usePathname();
-    const { theme, toggleTheme } = useTheme();
+    const { theme } = useTheme(); // Use new hook
     const { hasEntered } = useMission();
 
+    const isDark = theme === 'dark';
+    // Logo Logic: Switch assets if available, or use invert for simple black/white switch if asset logic undefined.
+    // User requested: White SVG (Night/Dark) and Black SVG (Day/Light).
+    // Assuming /KALINGA.png is White (Night Default). 
+    // I will dynamically set the class to invert it for Day mode if a specific black asset isn't confirmed, 
+    // OR swap src if I had the filename. Prompt said "switch... to a black SVG". 
+    // I'll stick to a CSS filter 'invert' on the container for the Day mode if the image is transparent white.
+    // White logo + invert(1) = Black logo.
+
     return (
-        <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-[#0e100f]/80 border-b border-white/10">
-            <div className="w-full px-4 h-20 flex items-center">
-                <div className="flex items-center shrink-0 gap-4">
+        <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-(--panel-glass) border-b border-(--border-color) transition-all duration-300">
+            <div className="w-full px-4 h-20 flex items-center justify-between xl:justify-start">
+
+                {/* Mobile: Logo Centered / Desktop: Logo Left */}
+                <div className="absolute left-1/2 -translate-x-1/2 xl:static xl:translate-x-0 xl:mr-8 flex items-center gap-4">
                     {/* Persistent Logo Container */}
-                    <div className="w-10 h-10 relative">
+                    <div className="w-10 h-10 xl:w-12 xl:h-12 relative shrink-0">
                         {hasEntered && (
                             <motion.div
                                 layoutId="main-logo"
-                                className="w-full h-full relative"
+                                className={`w-full h-full relative ${!isDark ? 'brightness-0 invert' : ''}`}
                                 transition={{ duration: 1.2, ease: "circOut" }}
                             >
                                 <Image
@@ -50,38 +63,44 @@ export default function Navbar() {
                             </motion.div>
                         )}
                     </div>
+                </div>
 
-                    <Link href="/" className="font-heading text-2xl tracking-widest hover:text-white/80 transition-colors hidden md:block">
-                        KALINGA
-                    </Link>
+                {/* Brand Name */}
+                <Link href="/" className="hidden md:block xl:hidden pl-16 font-heading text-2xl tracking-widest text-(--text-primary) hover:opacity-80 transition-opacity">
+                    KALINGA
+                </Link>
+                <Link href="/" className="hidden xl:block font-heading text-2xl tracking-widest text-(--text-primary) hover:opacity-80 transition-colors">
+                    KALINGA
+                </Link>
 
-                    <div className="hidden xl:block ml-8">
-                        <div className="flex items-baseline space-x-2">
-                            {navItems.map((item) => (
-                                <Link
-                                    key={item.name}
-                                    href={item.href}
-                                    className={clsx(
-                                        'px-3 py-2 rounded text-[10px] 2xl:text-xs font-bold transition-all duration-200 tracking-wider',
-                                        pathname === item.href
-                                            ? 'text-black bg-regolith shadow-[0_0_10px_var(--accent-secondary)]'
-                                            : 'text-gray-400 hover:text-white hover:bg-white/5'
-                                    )}
-                                >
-                                    {item.name}
-                                </Link>
-                            ))}
-                        </div>
+                {/* Desktop Navigation */}
+                <div className="hidden xl:block ml-8">
+                    <div className="flex items-baseline space-x-2">
+                        {navItems.map((item) => (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className={clsx(
+                                    'px-3 py-2 rounded text-[10px] 2xl:text-xs font-bold transition-all duration-200 tracking-wider whitespace-nowrap',
+                                    pathname === item.href
+                                        ? 'text-(--bg-primary) bg-(--accent-glow) shadow-[0_0_10px_var(--accent-glow)]'
+                                        : 'text-(--text-secondary) hover:text-(--text-primary) hover:bg-white/5'
+                                )}
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
                     </div>
+                </div>
 
-                    <div className="flex items-center gap-4 ml-auto lg:ml-0">
-                        {/* Mobile Menu Button would go here */}
-                        <button
-                            onClick={toggleTheme}
-                            className="p-2 rounded-full hover:bg-white/10 transition-colors text-white"
-                        >
-                            {theme === 'day' ? <Moon size={20} /> : <Sun size={20} />}
-                        </button>
+                {/* Right Side Controls */}
+                <div className="flex items-center gap-4 ml-auto">
+                    {/* Theme Toggle */}
+                    <ThemeToggle />
+
+                    {/* Mobile Menu Toggle */}
+                    <div className="xl:hidden text-(--text-primary)">
+                        <MobileNav />
                     </div>
                 </div>
             </div>

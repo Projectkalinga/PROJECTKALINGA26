@@ -20,21 +20,33 @@
   --color-kalinga: #00FF7F;
 }
 
-/* Day/Night Theme Variables */
+/* Day Mode (Default) - Martian Sand/White */
 :root {
-  /* Day Mode Defaults */
-  --bg-primary: #C1440E;
-  --bg-secondary: #8B3209;
-  --text-primary: #FFFFFF;
-  --panel-glass: rgba(255, 255, 255, 0.1);
+  --bg-primary: #f4ece2;
+  /* Warm Martian Dust */
+  --bg-secondary: #e8ded0;
+  /* Slightly Darker Sand */
+  --text-primary: #0e100f;
+  /* Matte Obsidian */
+  --text-secondary: #4a4a4a;
+  --accent-glow: #D35400;
+  /* Deep Burnt Orange */
+  --panel-glass: rgba(244, 236, 226, 0.7);
+  --border-color: rgba(14, 16, 15, 0.1);
 }
 
-[data-theme='night'] {
-  /* Night Mode Overrides */
+/* Night Mode (Deep Obsidian) */
+.dark {
   --bg-primary: #0e100f;
-  --bg-secondary: #1a1c1b;
-  --text-primary: #E5E5E5;
-  --panel-glass: rgba(14, 16, 15, 0.6);
+  /* Deep Obsidian */
+  --bg-secondary: #121413;
+  --text-primary: #f8f9fa;
+  /* White */
+  --text-secondary: #9ca3af;
+  --accent-glow: #FF4500;
+  /* Regolith Orange */
+  --panel-glass: rgba(14, 16, 15, 0.8);
+  --border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Base Styles */

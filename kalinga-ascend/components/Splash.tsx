@@ -13,7 +13,7 @@ export default function Splash() {
             <motion.div
                 initial={{ x: 0 }}
                 exit={{ x: '-100%', transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] } }}
-                className="absolute left-0 top-0 w-1/2 h-full bg-[#0e100f] border-r border-white/10 z-0"
+                className="absolute left-0 top-0 w-1/2 h-full bg-[#0e100f] border-r border-white/10 z-0 will-change-transform transform-gpu"
             >
                 {/* Texture */}
                 <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at right center, #1a1d1c 0%, #0e100f 100%)' }} />
@@ -26,7 +26,7 @@ export default function Splash() {
             <motion.div
                 initial={{ x: 0 }}
                 exit={{ x: '100%', transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] } }}
-                className="absolute right-0 top-0 w-1/2 h-full bg-[#0e100f] border-l border-white/10 z-0"
+                className="absolute right-0 top-0 w-1/2 h-full bg-[#0e100f] border-l border-white/10 z-0 will-change-transform transform-gpu"
             >
                 {/* Texture */}
                 <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at left center, #1a1d1c 0%, #0e100f 100%)' }} />

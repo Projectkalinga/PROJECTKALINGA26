@@ -82,14 +82,18 @@ export function ThrustCalculator() {
                             <span className="text-white font-bold">THROTTLE: {throttle}%</span>
                             <span>MAX (100%)</span>
                         </div>
-                        <input
-                            type="range"
-                            min="0"
-                            max="100"
-                            value={throttle}
-                            onChange={(e) => setThrottle(parseInt(e.target.value))}
-                            className="w-full appearance-none bg-white/10 h-2 rounded-full outline-hidden cursor-pointer accent-kalinga"
-                        />
+                        <div className="relative h-12 flex items-center">
+                            <input
+                                type="range"
+                                min="0"
+                                max="100"
+                                value={throttle}
+                                onChange={(e) => setThrottle(parseInt(e.target.value))}
+                                className="w-full appearance-none bg-white/10 h-4 md:h-2 rounded-full outline-hidden cursor-pointer accent-kalinga z-10 relative touch-none"
+                            />
+                            {/* Visual Track Enhancements */}
+                            <div className="absolute inset-x-0 h-4 bg-transparent z-0 pointer-events-none" />
+                        </div>
                         <div className="flex justify-between text-[10px] uppercase font-mono text-gray-600 mt-1">
                             <span className="cursor-pointer hover:text-white" onClick={() => setThrottle(0)}>Cutoff</span>
                             <span className="cursor-pointer text-kalinga font-bold hover:text-white" onClick={() => setThrottle(19)}>Hover (~19%)</span>
