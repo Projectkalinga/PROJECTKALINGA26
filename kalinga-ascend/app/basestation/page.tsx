@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function BaseStation() {
     return (
-        <main className="min-h-screen bg-black text-white pt-20">
+        <main className="min-h-screen bg-(--bg-primary) text-(--text-primary) pt-20 transition-colors duration-500">
             <Navbar />
 
             <div className="max-w-7xl mx-auto px-4 py-12">

@@ -78,7 +78,7 @@ async function Content({ slug }: { slug: string }) {
 
     if (!data) {
         return (
-            <main className="min-h-screen bg-black text-white pt-32 px-4 text-center">
+            <main className="min-h-screen bg-(--bg-primary) text-(--text-primary) pt-32 px-4 text-center transition-colors duration-500">
                 <Navbar />
                 <h1 className="text-4xl font-orbitron text-red-600">404 // DATA NOT FOUND</h1>
             </main>
@@ -86,7 +86,7 @@ async function Content({ slug }: { slug: string }) {
     }
 
     return (
-        <main className="min-h-screen bg-black text-white pt-24 selection:bg-martian-red">
+        <main className="min-h-screen bg-(--bg-primary) text-(--text-primary) pt-24 selection:bg-martian-red transition-colors duration-500">
             <Navbar />
 
             <div className="max-w-4xl mx-auto px-4 py-12">

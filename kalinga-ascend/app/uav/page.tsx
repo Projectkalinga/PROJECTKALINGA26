@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function UAV() {
     return (
-        <main className="min-h-screen bg-black text-white pt-20">
+        <main className="min-h-screen bg-(--bg-primary) text-(--text-primary) pt-20 transition-colors duration-500">
             <Navbar />
 
             <div className="max-w-7xl mx-auto px-4 py-12">
@@ -15,7 +15,7 @@ export default function UAV() {
                     className="flex flex-col md:flex-row items-end justify-between mb-16 border-b border-white/10 pb-8"
                 >
                     <div>
-                        <h1 className="text-5xl md:text-7xl font-orbitron text-white">M-14 <span className="text-martian-red">DRONE</span></h1>
+                        <h1 className="text-5xl md:text-7xl font-orbitron text-(--text-primary)">M-14 <span className="text-martian-red">DRONE</span></h1>
                         <p className="font-mono text-accent-orange mt-2">TECHNICAL SPECIFICATIONS SHEET // CLASSIFIED</p>
                     </div>
                     <div className="text-right hidden md:block">
