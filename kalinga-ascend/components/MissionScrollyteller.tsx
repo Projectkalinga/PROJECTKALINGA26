@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useScroll, useTransform, motion, MotionValue } from 'framer-motion';
-import { useTheme } from './ClientLayout';
+import { useTheme } from '@/components/ThemeProvider';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -132,7 +132,7 @@ function ScrollytellerContent({
                 ctx.drawImage(img, x, y, nw, nh);
 
                 // Color grading
-                ctx.fillStyle = theme === 'day'
+                ctx.fillStyle = theme === 'light'
                     ? 'rgba(193, 68, 14, 0.1)'
                     : 'rgba(0, 0, 0, 0.4)';
                 ctx.fillRect(0, 0, cw, ch);

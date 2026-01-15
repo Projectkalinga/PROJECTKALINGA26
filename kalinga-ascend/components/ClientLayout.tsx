@@ -1,3 +1,5 @@
+"use client";
+
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { MissionProvider, useMission } from '@/context/MissionContext';
 import Splash from './Splash';
