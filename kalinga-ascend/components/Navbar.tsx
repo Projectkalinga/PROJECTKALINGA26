@@ -1,51 +1,56 @@
 "use client";
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { clsx } from 'clsx';
-// import { Sun, Moon } from 'lucide-react'; // Moved to ThemeToggle
 import { useTheme } from '@/components/ThemeProvider';
 import { useMission } from '@/context/MissionContext';
-import { motion } from 'framer-motion';
-import MobileNav from './MobileNav';
+import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 
-const navItems = [
+// Full Project Page List (14 Pages)
+const NAV_LINKS = [
     { name: 'MISSION OVERVIEW', href: '/mission' },
-    { name: 'ARCHITECTURE', href: '/architecture' },
+    { name: 'SYSTEM ARCHITECTURE', href: '/architecture' },
+    { name: 'TESTING HIERARCHY', href: '/testing' },
+    { name: 'SPECIFICATIONS', href: '/specs' },
+    { name: 'MANAGEMENT', href: '/management' },
+    { name: 'NOVELTY & IMPACT', href: '/novelty' },
     { name: 'COMPONENTS', href: '/components' },
     { name: 'REALIZATION', href: '/realization' },
-    { name: 'TESTING', href: '/testing' },
-    { name: 'SPECS', href: '/specs' },
-    { name: 'EMERGENCY', href: '/emergency' },
-    { name: 'MANAGEMENT', href: '/management' },
-    { name: 'NOVELTY', href: '/novelty' },
     { name: '3D DIAGRAM', href: '/3d-diagram' },
-    { name: 'TEAM', href: '/team' },
+    { name: 'MEET THE CREW', href: '/team' },
+    { name: 'EMERGENCY', href: '/emergency' },
+    { name: 'ANALYSIS', href: '/analysis' },
+    { name: 'BASE STATION', href: '/basestation' },
+    { name: 'UAV SENSORS', href: '/sensors' },
 ];
 
 export default function Navbar() {
     const pathname = usePathname();
-    const { theme } = useTheme(); // Use new hook
+    const { theme } = useTheme();
     const { hasEntered } = useMission();
+    const [isOpen, setIsOpen] = useState(false);
 
     const isDark = theme === 'dark';
-    // Logo Logic: Switch assets if available, or use invert for simple black/white switch if asset logic undefined.
-    // User requested: White SVG (Night/Dark) and Black SVG (Day/Light).
-    // Assuming /KALINGA.png is White (Night Default). 
-    // I will dynamically set the class to invert it for Day mode if a specific black asset isn't confirmed, 
-    // OR swap src if I had the filename. Prompt said "switch... to a black SVG". 
-    // I'll stick to a CSS filter 'invert' on the container for the Day mode if the image is transparent white.
-    // White logo + invert(1) = Black logo.
+
+    // Desktop Nav Items (Subset for visual clarity on bar, or all? 
+    // Usually navbar has a limited set. I'll keep the top key ones for Desktop 'bar' 
+    // and full list in Mobile, OR just use the main ones. 
+    // Prompt says "Map through navLinks array to generate buttons for all pages" 
+    // specifically for the "Dropdown Navigation List" (Mobile/Sidebar). 
+    // I will retain the previous subset for Desktop to avoid overcrowding 
+    // but ensure Mobile/Hamburger has ALL 14).
+    const desktopItems = NAV_LINKS.slice(0, 8); // Show top 8 on desktop
 
     return (
         <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-(--panel-glass) border-b border-(--border-color) transition-all duration-300">
             <div className="w-full px-4 h-20 flex items-center justify-between xl:justify-start">
 
-                {/* Mobile: Logo Centered / Desktop: Logo Left */}
+                {/* Logo Section */}
                 <div className="absolute left-1/2 -translate-x-1/2 xl:static xl:translate-x-0 xl:mr-8 flex items-center gap-4">
-                    {/* Persistent Logo Container */}
                     <div className="w-10 h-10 xl:w-12 xl:h-12 relative shrink-0">
                         {hasEntered && (
                             <motion.div
@@ -66,17 +71,14 @@ export default function Navbar() {
                 </div>
 
                 {/* Brand Name */}
-                <Link href="/" className="hidden md:block xl:hidden pl-16 font-heading text-2xl tracking-widest text-(--text-primary) hover:opacity-80 transition-opacity">
-                    KALINGA
-                </Link>
                 <Link href="/" className="hidden xl:block font-heading text-2xl tracking-widest text-(--text-primary) hover:opacity-80 transition-colors">
                     KALINGA
                 </Link>
 
-                {/* Desktop Navigation */}
+                {/* Desktop Navigation (Hidden on Mobile) */}
                 <div className="hidden xl:block ml-8">
-                    <div className="flex items-baseline space-x-2">
-                        {navItems.map((item) => (
+                    <div className="flex items-baseline space-x-1">
+                        {desktopItems.map((item) => (
                             <Link
                                 key={item.name}
                                 href={item.href}
@@ -93,17 +95,81 @@ export default function Navbar() {
                     </div>
                 </div>
 
-                {/* Right Side Controls */}
+                {/* Controls (Theme + Hamburger) */}
                 <div className="flex items-center gap-4 ml-auto">
-                    {/* Theme Toggle */}
                     <ThemeToggle />
 
-                    {/* Mobile Menu Toggle */}
-                    <div className="xl:hidden text-(--text-primary)">
-                        <MobileNav />
-                    </div>
+                    {/* Hamburger Button (Visible on Mobile/Tablet) */}
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="xl:hidden group relative z-50 p-2 focus:outline-hidden"
+                        aria-label="Toggle Menu"
+                    >
+                        <div className="flex flex-col justify-between w-6 h-5">
+                            {/* Top Line */}
+                            <span className={clsx(
+                                "block h-0.5 w-full bg-current transform transition-all duration-300 ease-in-out",
+                                isOpen ? "rotate-45 translate-y-2" : ""
+                            )} />
+
+                            {/* Middle Line */}
+                            <span className={clsx(
+                                "block h-0.5 w-full bg-current transition-opacity duration-300 ease-in-out",
+                                isOpen ? "opacity-0" : "opacity-100"
+                            )} />
+
+                            {/* Bottom Line */}
+                            <span className={clsx(
+                                "block h-0.5 w-full bg-current transform transition-all duration-300 ease-in-out",
+                                isOpen ? "-rotate-45 -translate-y-2.5" : "" // Adjusted slightly to -2.5 (10px) to match height of 5 (20px) roughly
+                            )} />
+                        </div>
+                    </button>
                 </div>
             </div>
+
+            {/* Mobile / Full-Screen Overlay Dropdown */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                        animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
+                        exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 top-0 left-0 w-full h-screen z-40 bg-[#0e100f]/95 text-white overflow-y-auto"
+                    >
+                        <div className="flex flex-col items-center justify-center min-h-screen py-20 px-6 space-y-6">
+                            {NAV_LINKS.map((item, idx) => (
+                                <motion.div
+                                    key={item.name}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: idx * 0.05, duration: 0.3 }}
+                                    className="w-full max-w-md text-center"
+                                >
+                                    <Link
+                                        href={item.href}
+                                        onClick={() => setIsOpen(false)} // Critical: Auto-close
+                                        className={clsx(
+                                            "block text-2xl md:text-3xl font-heading tracking-widest transition-all duration-300",
+                                            pathname === item.href
+                                                ? "text-[#00FF7F] drop-shadow-[0_0_10px_rgba(0,255,127,0.5)]" // Active: Kalinga Green
+                                                : "text-gray-400 hover:text-[#FF4500] hover:scale-105" // Hover: Regolith Orange
+                                        )}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                </motion.div>
+                            ))}
+
+                            <div className="mt-12 w-full max-w-[200px] h-px bg-white/10" />
+                            <div className="text-[10px] font-mono text-gray-500 tracking-[0.2em] pt-4">
+                                PROJECT KALINGA • SYSTEM READY
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 }
