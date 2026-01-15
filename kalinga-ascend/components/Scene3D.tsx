@@ -3,7 +3,7 @@
 import { Canvas } from '@react-three/fiber';
 import { Html, useProgress, Preload } from '@react-three/drei';
 import { Suspense, useEffect, useState, useRef } from 'react';
-import { useTheme } from '@/components/ThemeProvider';
+import { useTheme } from './ThemeProvider';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Progressive Loader Component

@@ -153,9 +153,9 @@ function ScrollytellerContent({
     }, [imagesUAV, imagesBase, scrollYProgress, theme]);
 
     return (
-        <div ref={containerRef} className="relative h-[600vh] bg-[#0e100f]">
+        <div ref={containerRef} className="relative h-[600vh] bg-(--bg-primary) transition-colors duration-500">
             <div className="fixed inset-0 flex items-center justify-center pointer-events-none opacity-10 z-0 select-none">
-                <h1 className="text-[20vw] font-black text-gray-500 font-heading">KALINGA</h1>
+                <h1 className="text-[20vw] font-black text-(--text-secondary) font-heading transition-colors">KALINGA</h1>
             </div>
 
             <canvas
@@ -200,16 +200,16 @@ function TextSection({ section, scrollYProgress }: { section: StorySection; scro
             style={{ opacity, y }}
             className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-center ${alignClass}`}
         >
-            <div className="max-w-4xl glass-panel p-8 backdrop-blur-md bg-black/30 border-l-4 border-regolith">
-                <h2 className="text-4xl md:text-6xl font-heading text-white/90 mb-4 leading-tight">
+            <div className="max-w-4xl glass-panel p-8 backdrop-blur-md bg-(--panel-glass) border-l-4 border-(--accent-glow)">
+                <h2 className="text-4xl md:text-6xl font-heading text-(--text-primary) mb-4 leading-tight transition-colors">
                     {section.title}
                 </h2>
-                <p className="font-mono text-lg md:text-xl text-white/60 mb-6">
+                <p className="font-mono text-lg md:text-xl text-(--text-secondary) mb-6 font-bold transition-colors">
                     {section.subtext}
                 </p>
 
                 {section.align === 'center' && section.title.includes("Ready for Sortie") && (
-                    <Link href="/3d-diagram" className="pointer-events-auto inline-block px-8 py-3 bg-regolith text-black font-heading tracking-widest hover:bg-white transition-colors">
+                    <Link href="/3d-diagram" className="pointer-events-auto inline-block px-8 py-3 bg-(--accent-glow) text-(--bg-primary) font-heading tracking-widest hover:opacity-90 transition-all">
                         VIEW 3D DIAGRAM
                     </Link>
                 )}
