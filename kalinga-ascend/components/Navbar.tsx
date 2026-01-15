@@ -50,7 +50,7 @@ export default function Navbar() {
                         {hasEntered && (
                             <motion.div
                                 layoutId="main-logo"
-                                className={`w-full h-full relative ${!isDark ? 'brightness-0 invert' : ''}`}
+                                className={`w-full h-full relative ${!isDark ? 'invert' : ''}`}
                                 transition={{ duration: 1.2, ease: "circOut" }}
                             >
                                 <Image
