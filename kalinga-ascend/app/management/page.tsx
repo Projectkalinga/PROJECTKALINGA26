@@ -5,6 +5,7 @@ import { MissionEconomics } from '@/components/MissionEconomics';
 import { motion } from 'framer-motion';
 import { Calendar, Users, ShieldAlert, CheckCircle, AlertTriangle, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { TEAM_ROSTER, DOMAIN_GROUPS } from '@/constants/teamData';
 
 export default function ManagementPage() {
     return (
@@ -150,33 +151,77 @@ export default function ManagementPage() {
                     </div>
                 </section>
 
-                {/* 5. MISSION CREW */}
+                {/* 5. MISSION CREW - DOMAIN GROUPED */}
                 <section>
                     <div className="flex items-center gap-4 mb-8">
                         <div className="w-1 h-8 bg-regolith" />
-                        <h2 className="text-3xl font-heading">COMMAND STRUCTURE</h2>
+                        <h2 className="text-3xl font-heading">DOMAIN STRUCTURE</h2>
                     </div>
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                        {[
-                            "Lead AI Architect",
-                            "Propulsion Engineer",
-                            "Structural Specialist",
-                            "Power Systems Lead",
-                            "Safety Officer",
-                            "V-SLAM Analyst",
-                            "Telemetry Lead",
-                            "Hardware Integration",
-                            "Base Station Arch.",
-                            "Mission Director"
-                        ].map((role, idx) => (
-                            <div key={idx} className="glass-panel p-4 text-center hover:bg-white/5 transition-colors">
-                                <div className="w-12 h-12 bg-gray-800 rounded-full mx-auto mb-3 border border-white/10 flex items-center justify-center">
-                                    <span className="font-heading text-xs text-gray-500">K-{idx + 1}</span>
-                                </div>
-                                <h4 className="text-xs font-bold text-white mb-1">{role}</h4>
-                                <p className="text-[10px] font-mono text-gray-500">ACTIVE</p>
+
+                    <div className="space-y-8">
+                        {/* Hardware Group */}
+                        <div>
+                            <h3 className="text-xl font-heading text-kalinga mb-4 uppercase tracking-widest">Hardware Group</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {TEAM_ROSTER.filter(m => DOMAIN_GROUPS.hardware.includes(m.domainDesignation)).map((member, idx) => (
+                                    <div key={idx} className="glass-panel p-4 hover:bg-white/5 transition-colors">
+                                        <div className="w-12 h-12 bg-gray-800 rounded-full mx-auto mb-3 border border-white/10 flex items-center justify-center">
+                                            <member.icon size={20} className="text-kalinga" />
+                                        </div>
+                                        <h4 className="text-sm font-bold text-white mb-1 text-center">{member.domainDesignation}</h4>
+                                        <p className="text-xs font-mono text-gray-500 text-center">{member.name.split(' ')[0]}</p>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
+
+                        {/* Software Group */}
+                        <div>
+                            <h3 className="text-xl font-heading text-blue-500 mb-4 uppercase tracking-widest">Software Group</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {TEAM_ROSTER.filter(m => DOMAIN_GROUPS.software.includes(m.domainDesignation)).map((member, idx) => (
+                                    <div key={idx} className="glass-panel p-4 hover:bg-white/5 transition-colors">
+                                        <div className="w-12 h-12 bg-gray-800 rounded-full mx-auto mb-3 border border-white/10 flex items-center justify-center">
+                                            <member.icon size={20} className="text-blue-500" />
+                                        </div>
+                                        <h4 className="text-sm font-bold text-white mb-1 text-center">{member.domainDesignation}</h4>
+                                        <p className="text-xs font-mono text-gray-500 text-center">{member.name.split(' ')[0]}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Operations Group */}
+                        <div>
+                            <h3 className="text-xl font-heading text-regolith mb-4 uppercase tracking-widest">Operations Group</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {TEAM_ROSTER.filter(m => DOMAIN_GROUPS.operations.includes(m.domainDesignation)).map((member, idx) => (
+                                    <div key={idx} className="glass-panel p-4 hover:bg-white/5 transition-colors">
+                                        <div className="w-12 h-12 bg-gray-800 rounded-full mx-auto mb-3 border border-white/10 flex items-center justify-center">
+                                            <member.icon size={20} className="text-regolith" />
+                                        </div>
+                                        <h4 className="text-sm font-bold text-white mb-1 text-center">{member.domainDesignation}</h4>
+                                        <p className="text-xs font-mono text-gray-500 text-center">{member.name.split(' ')[0]}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Infrastructure */}
+                        <div>
+                            <h3 className="text-xl font-heading text-yellow-500 mb-4 uppercase tracking-widest">Infrastructure</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {TEAM_ROSTER.filter(m => DOMAIN_GROUPS.infrastructure.includes(m.domainDesignation)).map((member, idx) => (
+                                    <div key={idx} className="glass-panel p-4 hover:bg-white/5 transition-colors">
+                                        <div className="w-12 h-12 bg-gray-800 rounded-full mx-auto mb-3 border border-white/10 flex items-center justify-center">
+                                            <member.icon size={20} className="text-yellow-500" />
+                                        </div>
+                                        <h4 className="text-sm font-bold text-white mb-1 text-center">{member.domainDesignation}</h4>
+                                        <p className="text-xs font-mono text-gray-500 text-center">{member.name.split(' ')[0]}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </section>
 
