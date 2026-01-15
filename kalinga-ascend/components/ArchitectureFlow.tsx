@@ -190,23 +190,23 @@ export function ArchitectureFlow() {
 
                     {/* --- SVG PATHS --- */}
                     {/* Cluster 1 (Base) -> Cluster 3 (FCU) */}
-                    <path id="path-base-fcu" className="flow-path" d="M150,350 C250,350 300,350 400,350" stroke="var(--accent-glow)" strokeWidth="2" fill="none" />
+                    <path id="path-base-fcu" className="flow-path neon-svg-glow" d="M150,350 C250,350 300,350 400,350" stroke="var(--accent-glow)" strokeWidth="2" fill="none" />
 
                     {/* Cluster 2 (Perception) -> Cluster 3 (FCU) */}
-                    <path id="path-jetson-fcu" className="flow-path" d="M600,200 C600,300 550,350 500,350" stroke="#00BFFF" strokeWidth="3" fill="none" />
+                    <path id="path-jetson-fcu" className="flow-path neon-svg-glow" d="M600,200 C600,300 550,350 500,350" stroke="#00BFFF" strokeWidth="3" fill="none" />
 
                     {/* Sensors -> Jetson */}
-                    <path id="path-cam-jetson" className="flow-path" d="M450,100 L550,150" stroke="#FFD700" strokeWidth="2" fill="none" />
-                    <path id="path-lidar-jetson" className="flow-path" d="M750,100 L650,150" stroke="#00FF7F" strokeWidth="2" fill="none" />
+                    <path id="path-cam-jetson" className="flow-path neon-svg-glow" d="M450,100 L550,150" stroke="#FFD700" strokeWidth="2" fill="none" />
+                    <path id="path-lidar-jetson" className="flow-path neon-svg-glow" d="M750,100 L650,150" stroke="#00FF7F" strokeWidth="2" fill="none" />
 
                     {/* FCU -> Actuation */}
-                    <path id="path-fcu-motor" className="flow-path" d="M500,400 L500,500" stroke="#FF4500" strokeWidth="2" fill="none" />
+                    <path id="path-fcu-motor" className="flow-path neon-svg-glow" d="M500,400 L500,500" stroke="#FF4500" strokeWidth="2" fill="none" />
 
                     {/* Landing Gear -> Base (Return Loop) */}
-                    <path id="path-landing-base" className="flow-path" d="M400,550 C200,550 150,450 150,400" stroke="#9370DB" strokeWidth="2" fill="none" strokeDasharray="5,5" />
+                    <path id="path-landing-base" className="flow-path neon-svg-glow" d="M400,550 C200,550 150,450 150,400" stroke="#9370DB" strokeWidth="2" fill="none" strokeDasharray="5,5" />
 
                     {/* Base Internal */}
-                    <path id="path-base-charging" className="flow-path" d="M150,300 L150,250" stroke="#00FF7F" strokeWidth="2" fill="none" />
+                    <path id="path-base-charging" className="flow-path neon-svg-glow" d="M150,300 L150,250" stroke="#00FF7F" strokeWidth="2" fill="none" />
 
                 </svg>
 

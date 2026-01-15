@@ -20,19 +20,21 @@
   --color-kalinga: #00FF7F;
 }
 
-/* Day Mode (Default) - Martian Sand/White */
+/* Day Mode (High-Visibility) */
 :root {
-  --bg-primary: #f4ece2;
-  /* Warm Martian Dust */
-  --bg-secondary: #e8ded0;
-  /* Slightly Darker Sand */
-  --text-primary: #0e100f;
-  /* Matte Obsidian */
-  --text-secondary: #4a4a4a;
+  --bg-primary: #ffffff;
+  /* Pure White */
+  --bg-secondary: #f3f4f6;
+  /* Gray-100 */
+  --text-primary: #000000;
+  /* Pure Black */
+  --text-secondary: #4b5563;
+  /* Gray-600 */
   --accent-glow: #D35400;
-  /* Deep Burnt Orange */
-  --panel-glass: rgba(244, 236, 226, 0.7);
-  --border-color: rgba(14, 16, 15, 0.1);
+  /* Deep Burnt Orange (High Saturation) */
+  --panel-glass: rgba(255, 255, 255, 0.9);
+  /* High Opacity White Glass */
+  --border-color: rgba(0, 0, 0, 0.1);
 }
 
 /* Night Mode (Deep Obsidian) */
@@ -81,5 +83,21 @@ body {
     will-change: transform;
     /* Ensure they are above everything except the button (z-10000) */
     z-index: 9000;
+  }
+
+  .neon-glow {
+    box-shadow: none;
+  }
+
+  .dark .neon-glow {
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+  }
+
+  .neon-svg-glow {
+    filter: none;
+  }
+
+  .dark .neon-svg-glow {
+    filter: drop-shadow(0 0 5px rgba(255, 69, 0, 0.7));
   }
 }

@@ -50,9 +50,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         setThemeState(prev => (prev === "dark" ? "light" : "dark"));
     };
 
-    // Prevent hydration mismatch by rendering children only after mount (optional, 
-    // or use suppression. For CSS vars, plain rendering is usually fine but 
-    // classes on HTML need care. Here we render children always but theme effect runs in useEffect).
+    // Prevent hydration mismatch by rendering children only after mount
     return (
         <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
             {children}
