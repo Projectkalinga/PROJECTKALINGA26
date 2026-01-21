@@ -8,7 +8,20 @@ const config: Config = {
         "./app/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                heading: ['Outfit', 'sans-serif'],
+                data: ['Space Mono', 'monospace'],
+            },
+            colors: {
+                'martian-red': '#C1440E',
+                'martian-rust': '#8B3209',
+                'accent-primary': '#00FF7F',
+                'accent-secondary': '#FF4500',
+                'regolith': '#FF4500',
+                'kalinga': '#00FF7F',
+            },
+        },
     },
     plugins: [],
 };
