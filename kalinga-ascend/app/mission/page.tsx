@@ -25,7 +25,7 @@ export default function Mission() {
                     <div className="w-full md:w-1/2 relative">
                         <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden rounded-xl border border-(--border-color) shadow-2xl">
                             <Image
-                                src="/images/drone_image_1.png"
+                                src="/uav.jpeg"
                                 alt="ASCEND-Pro UAV"
                                 fill
                                 style={{ objectFit: 'cover', objectPosition: 'center' }} // Crucial: Shifts Veo out if at bottom/right
@@ -51,7 +51,7 @@ export default function Mission() {
                     <div className="w-full md:w-1/2 relative">
                         <div className="relative w-full h-[500px] overflow-hidden rounded-xl border border-(--border-color) shadow-2xl">
                             <Image
-                                src="/images/exploded_view_image_2.png"
+                                src="/uav components.jpg"
                                 alt="ASCEND-Pro Exploded View"
                                 fill
                                 style={{ objectFit: 'cover', objectPosition: '50% 30%' }} // Adjusted to crop bottom (Veo) more aggressively if needed
