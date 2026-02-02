@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* Day Mode (High-Visibility) */
+:root {
+  --bg-primary: #ffffff;
+  /* Pure White */
+  --bg-secondary: #f3f4f6;
+  /* Gray-100 */
+  --text-primary: #000000;
+  /* Pure Black */
+  --text-secondary: #4b5563;
+  /* Gray-600 */
+  --accent-glow: #D35400;
+  /* Deep Burnt Orange (High Saturation) */
+  --panel-glass: rgba(255, 255, 255, 0.9);
+  /* High Opacity White Glass */
+  --border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Night Mode (Deep Obsidian) */
+.dark {
+  --bg-primary: #0e100f;
+  /* Deep Obsidian */
+  --bg-secondary: #121413;
+  --text-primary: #f8f9fa;
+  /* White */
+  --text-secondary: #9ca3af;
+  --accent-glow: #FF4500;
+  /* Regolith Orange */
+  --panel-glass: rgba(14, 16, 15, 0.8);
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Base Styles */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Space Mono', monospace;
+  transition: background-color 0.5s ease;
+}
+
+/* Utilities */
+@layer utilities {
+  .glass-panel {
+    background: var(--panel-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+
+  .split-door-left,
+  .split-door-right {
+    position: fixed;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+    /* Ensure they are above everything except the button (z-10000) */
+    z-index: 9000;
+  }
+
+  .neon-glow {
+    box-shadow: none;
+  }
+
+  .dark .neon-glow {
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+  }
+
+  .neon-svg-glow {
+    filter: none;
+  }
+
+  .dark .neon-svg-glow {
+    filter: drop-shadow(0 0 5px rgba(255, 69, 0, 0.7));
+  }
+}
