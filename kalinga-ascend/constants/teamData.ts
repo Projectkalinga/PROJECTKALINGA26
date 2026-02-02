@@ -19,7 +19,7 @@ export const TEAM_ROSTER: TeamMember[] = [
         keyHardware: "NVIDIA Jetson Orin Nano / OAK-D Lite",
         impactTooltip: "Ensures <1m landing precision via ArUco vision alignment",
         icon: Activity,
-        image: "/team/aurosri-arman-panigrahi.jpg"
+        image: "/team/AUROSRI ARMAN PANIGRAHI.jpeg"
     },
     {
         name: "Debasis Nayak",
@@ -28,7 +28,7 @@ export const TEAM_ROSTER: TeamMember[] = [
         keyHardware: "Cube Orange+ / T-Motor 4006",
         impactTooltip: "Delivers 18min flight time through thrust optimization",
         icon: Zap,
-        image: "/team/debasis-nayak.jpg"
+        image: "/team/DEBASIS NAYAK.jpeg"
     },
     {
         name: "Advik Rai",
@@ -37,7 +37,7 @@ export const TEAM_ROSTER: TeamMember[] = [
         keyHardware: "330mm 3K Carbon Fiber Monocoque",
         impactTooltip: "Achieves 1655g total mass with 5:1 safety factor",
         icon: Box,
-        image: "/team/advik-rai.jpg"
+        image: "/team/ADVIK RAI.jpeg"
     },
     {
         name: "Aayush Saha",
@@ -46,7 +46,7 @@ export const TEAM_ROSTER: TeamMember[] = [
         keyHardware: "Solar Walls / 6S LiPo / Gold Pogo Pins",
         impactTooltip: "Enables autonomous 24hr recharge cycles at Base Station",
         icon: Battery,
-        image: "/team/aayush-saha.jpg"
+        image: "/team/AYUSH SHAH.jpeg"
     },
     {
         name: "Ayush Pradhan",
@@ -55,7 +55,7 @@ export const TEAM_ROSTER: TeamMember[] = [
         keyHardware: "915MHz Telemetry / Jetson Edge Compute",
         impactTooltip: "Processes 30Hz sensor fusion with <50ms latency",
         icon: Cpu,
-        image: "/team/ayush-pradhan.jpg"
+        image: "/team/AYUSH PRADHAN.jpeg"
     },
     {
         name: "Bornak Roy",
@@ -64,7 +64,7 @@ export const TEAM_ROSTER: TeamMember[] = [
         keyHardware: "Autonomous RTB / Failsafe Matrix",
         impactTooltip: "Guarantees RTB on <20% battery or comms loss",
         icon: Shield,
-        image: "/team/bornark-roy.png"
+        image: "/team/BORNARK ROY.png"
     },
     {
         name: "Boibhav Dey",
@@ -73,7 +73,7 @@ export const TEAM_ROSTER: TeamMember[] = [
         keyHardware: "TPU Landing Gear / Alignment Funnel",
         impactTooltip: "Absorbs 2m/s vertical impact on 15° slopes",
         icon: Cog,
-        image: "/team/boibhav-dey.jpg"
+        image: "/team/BOIBHAV DEY.jpeg"
     },
     {
         name: "Rudra Pratap Sahu",
@@ -82,7 +82,7 @@ export const TEAM_ROSTER: TeamMember[] = [
         keyHardware: "₹ 2 Lakh Allocation Management",
         impactTooltip: "Optimized procurement to stay within ₹2L budget",
         icon: DollarSign,
-        image: "/team/rudra-pratap-sahu.jpg"
+        image: "/team/RUDRA PRATAP SAHU.jpeg"
     },
     {
         name: "Prabhu Krupa Biswal",
@@ -91,7 +91,7 @@ export const TEAM_ROSTER: TeamMember[] = [
         keyHardware: "Mavlink Protocol / Hardware-in-the-Loop",
         impactTooltip: "Unified 8 hardware modules into single flight stack",
         icon: GitMerge,
-        image: "/team/prabhu-krupa-biswal.jpg"
+        image: "/team/PRABHU KRUPA BISWAL.jpeg"
     },
     {
         name: "Arnish Das",
@@ -100,7 +100,7 @@ export const TEAM_ROSTER: TeamMember[] = [
         keyHardware: "Virtual Hangar Benchmarking",
         impactTooltip: "Validated 500+ flight scenarios in SITL before hardware tests",
         icon: CheckCircle,
-        image: "/team/arnish-das.jpg"
+        image: "/team/ARNISH DAS.jpeg"
     }
 ];
 
