@@ -44,8 +44,8 @@ export default function Navbar() {
     // specifically for the "Dropdown Navigation List" (Mobile/Sidebar). 
     // I will retain the previous subset for Desktop to avoid overcrowding 
     // but ensure Mobile/Hamburger has ALL 14).
-    const group1 = NAV_LINKS.slice(0, 7);
-    const group2 = NAV_LINKS.slice(7);
+    const group1 = NAV_LINKS.slice(0, 6);
+    const group2 = NAV_LINKS.slice(6);
 
     return (
         <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-(--panel-glass) border-b border-(--border-color) transition-all duration-300">
@@ -96,7 +96,7 @@ export default function Navbar() {
                                             'relative px-4 py-2 rounded-full text-xs 2xl:text-sm font-black transition-all duration-300 tracking-wider whitespace-nowrap z-10',
                                             pathname === item.href
                                                 ? 'text-black'
-                                                : 'text-white hover:text-white/80'
+                                                : isDark ? 'text-white hover:text-white/80' : 'text-black hover:text-black/80'
                                         )}
                                     >
                                         {pathname === item.href && (
@@ -111,7 +111,10 @@ export default function Navbar() {
                                 ))}
                                 <button
                                     onClick={() => setShowMore(true)}
-                                    className="px-4 py-2 text-white font-black text-xl hover:scale-110 transition-transform flex items-center justify-center"
+                                    className={clsx(
+                                        "w-8 h-8 rounded-full border border-current/20 flex items-center justify-center transition-all hover:bg-current/10 font-black text-xl ml-2",
+                                        isDark ? "text-white" : "text-black"
+                                    )}
                                     aria-label="Show more"
                                 >
                                     &gt;
@@ -128,7 +131,10 @@ export default function Navbar() {
                             >
                                 <button
                                     onClick={() => setShowMore(false)}
-                                    className="px-4 py-2 text-white font-black text-xl hover:scale-110 transition-transform flex items-center justify-center mr-2"
+                                    className={clsx(
+                                        "w-8 h-8 rounded-full border border-current/20 flex items-center justify-center transition-all hover:bg-current/10 font-black text-xl mr-2",
+                                        isDark ? "text-white" : "text-black"
+                                    )}
                                     aria-label="Show less"
                                 >
                                     &lt;
@@ -141,7 +147,7 @@ export default function Navbar() {
                                             'relative px-4 py-2 rounded-full text-xs 2xl:text-sm font-black transition-all duration-300 tracking-wider whitespace-nowrap z-10',
                                             pathname === item.href
                                                 ? 'text-black'
-                                                : 'text-white hover:text-white/80'
+                                                : isDark ? 'text-white hover:text-white/80' : 'text-black hover:text-black/80'
                                         )}
                                     >
                                         {pathname === item.href && (
