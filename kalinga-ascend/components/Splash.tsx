@@ -13,7 +13,7 @@ export default function Splash() {
             <motion.div
                 initial={{ x: 0 }}
                 exit={{ x: '-100%', transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] } }}
-                className="absolute left-0 top-0 w-1/2 h-full bg-[#0e100f] border-r border-white/10 z-0 will-change-transform transform-gpu"
+                className="absolute left-0 top-0 w-1/2 h-full bg-[#0e100f] z-0 will-change-transform transform-gpu"
             >
                 {/* Texture */}
                 <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at right center, #1a1d1c 0%, #0e100f 100%)' }} />
@@ -26,7 +26,7 @@ export default function Splash() {
             <motion.div
                 initial={{ x: 0 }}
                 exit={{ x: '100%', transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] } }}
-                className="absolute right-0 top-0 w-1/2 h-full bg-[#0e100f] border-l border-white/10 z-0 will-change-transform transform-gpu"
+                className="absolute right-0 top-0 w-1/2 h-full bg-[#0e100f] z-0 will-change-transform transform-gpu"
             >
                 {/* Texture */}
                 <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at left center, #1a1d1c 0%, #0e100f 100%)' }} />
@@ -44,7 +44,7 @@ export default function Splash() {
                     animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                     transition={{ duration: 1.2, ease: "circOut" }}
                 >
-                    <div className="relative w-32 h-32 md:w-48 md:h-48">
+                    <div className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden bg-black/20">
                         <Image
                             src="/KALINGA.png"
                             alt="KALINGA Logo"
