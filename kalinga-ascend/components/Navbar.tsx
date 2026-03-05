@@ -33,6 +33,7 @@ export default function Navbar() {
     const { theme } = useTheme();
     const { hasEntered } = useMission();
     const [isOpen, setIsOpen] = useState(false);
+    const [showMore, setShowMore] = useState(false);
 
     const isDark = theme === 'dark';
 
@@ -43,7 +44,8 @@ export default function Navbar() {
     // specifically for the "Dropdown Navigation List" (Mobile/Sidebar). 
     // I will retain the previous subset for Desktop to avoid overcrowding 
     // but ensure Mobile/Hamburger has ALL 14).
-    const desktopItems = NAV_LINKS.slice(0, 10); // Show top 10 on desktop (includes Team)
+    const group1 = NAV_LINKS.slice(0, 7);
+    const group2 = NAV_LINKS.slice(7);
 
     return (
         <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-(--panel-glass) border-b border-(--border-color) transition-all duration-300">
@@ -75,31 +77,86 @@ export default function Navbar() {
                     KALINGA
                 </Link>
 
-                {/* Desktop Navigation (Hidden on Mobile) */}
-                <div className="hidden xl:block ml-8">
-                    <div className="flex items-baseline space-x-1">
-                        {desktopItems.map((item) => (
-                            <Link
-                                key={item.name}
-                                href={item.href}
-                                className={clsx(
-                                    'relative px-4 py-2 rounded-full text-[10px] 2xl:text-xs font-black transition-all duration-300 tracking-wider whitespace-nowrap z-10',
-                                    pathname === item.href
-                                        ? 'text-black'
-                                        : 'text-white hover:text-white/80'
-                                )}
+                <div className="hidden xl:flex items-center ml-8 overflow-hidden relative max-w-[70vw]">
+                    <AnimatePresence mode="wait">
+                        {!showMore ? (
+                            <motion.div
+                                key="group1"
+                                initial={{ x: 50, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                exit={{ x: -50, opacity: 0 }}
+                                transition={{ duration: 0.5, ease: "circOut" }}
+                                className="flex items-center space-x-1"
                             >
-                                {pathname === item.href && (
-                                    <motion.div
-                                        layoutId="active-nav-pill"
-                                        className="absolute inset-0 bg-white rounded-full -z-10"
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                    />
-                                )}
-                                {item.name}
-                            </Link>
-                        ))}
-                    </div>
+                                {group1.map((item) => (
+                                    <Link
+                                        key={item.name}
+                                        href={item.href}
+                                        className={clsx(
+                                            'relative px-4 py-2 rounded-full text-xs 2xl:text-sm font-black transition-all duration-300 tracking-wider whitespace-nowrap z-10',
+                                            pathname === item.href
+                                                ? 'text-black'
+                                                : 'text-white hover:text-white/80'
+                                        )}
+                                    >
+                                        {pathname === item.href && (
+                                            <motion.div
+                                                layoutId="active-nav-pill"
+                                                className="absolute inset-0 bg-white rounded-full -z-10"
+                                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                            />
+                                        )}
+                                        {item.name}
+                                    </Link>
+                                ))}
+                                <button
+                                    onClick={() => setShowMore(true)}
+                                    className="px-4 py-2 text-white font-black text-xl hover:scale-110 transition-transform flex items-center justify-center"
+                                    aria-label="Show more"
+                                >
+                                    &gt;
+                                </button>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="group2"
+                                initial={{ x: 50, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                exit={{ x: -50, opacity: 0 }}
+                                transition={{ duration: 0.5, ease: "circOut" }}
+                                className="flex items-center space-x-1"
+                            >
+                                <button
+                                    onClick={() => setShowMore(false)}
+                                    className="px-4 py-2 text-white font-black text-xl hover:scale-110 transition-transform flex items-center justify-center mr-2"
+                                    aria-label="Show less"
+                                >
+                                    &lt;
+                                </button>
+                                {group2.map((item) => (
+                                    <Link
+                                        key={item.name}
+                                        href={item.href}
+                                        className={clsx(
+                                            'relative px-4 py-2 rounded-full text-xs 2xl:text-sm font-black transition-all duration-300 tracking-wider whitespace-nowrap z-10',
+                                            pathname === item.href
+                                                ? 'text-black'
+                                                : 'text-white hover:text-white/80'
+                                        )}
+                                    >
+                                        {pathname === item.href && (
+                                            <motion.div
+                                                layoutId="active-nav-pill"
+                                                className="absolute inset-0 bg-white rounded-full -z-10"
+                                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                            />
+                                        )}
+                                        {item.name}
+                                    </Link>
+                                ))}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
 
                 {/* Controls (Theme + Hamburger) */}
