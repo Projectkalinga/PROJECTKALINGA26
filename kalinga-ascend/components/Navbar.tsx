@@ -55,7 +55,7 @@ export default function Navbar() {
                         {hasEntered && (
                             <motion.div
                                 layoutId="main-logo"
-                                className={`w-full h-full relative ${!isDark ? 'invert' : ''}`}
+                                className={`w-full h-full relative rounded-full overflow-hidden bg-black/20 ${!isDark ? 'invert' : ''}`}
                                 transition={{ duration: 1.2, ease: "circOut" }}
                             >
                                 <Image
@@ -83,12 +83,19 @@ export default function Navbar() {
                                 key={item.name}
                                 href={item.href}
                                 className={clsx(
-                                    'px-3 py-2 rounded text-[10px] 2xl:text-xs font-bold transition-all duration-200 tracking-wider whitespace-nowrap',
+                                    'relative px-4 py-2 rounded-full text-[10px] 2xl:text-xs font-black transition-all duration-300 tracking-wider whitespace-nowrap z-10',
                                     pathname === item.href
-                                        ? 'text-(--bg-primary) bg-(--accent-glow) shadow-[0_0_10px_var(--accent-glow)]'
-                                        : 'text-(--text-secondary) hover:text-(--text-primary) hover:bg-white/5'
+                                        ? 'text-black'
+                                        : 'text-white hover:text-white/80'
                                 )}
                             >
+                                {pathname === item.href && (
+                                    <motion.div
+                                        layoutId="active-nav-pill"
+                                        className="absolute inset-0 bg-white rounded-full -z-10"
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                    />
+                                )}
                                 {item.name}
                             </Link>
                         ))}
