@@ -26,6 +26,7 @@ const NAV_LINKS = [
     { name: 'ANALYSIS', href: '/analysis' },
     { name: 'BASE STATION', href: '/basestation' },
     { name: 'UAV SENSORS', href: '/sensors' },
+    { name: 'RESOURCES', href: '/resources' },
 ];
 
 export default function Navbar() {

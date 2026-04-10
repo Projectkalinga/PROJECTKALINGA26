@@ -3,6 +3,7 @@
 import Navbar from '@/components/Navbar';
 import ImageSequence from '@/components/ImageSequence';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Home() {
 
@@ -40,6 +41,19 @@ export default function Home() {
               <br />
               Proposal ID: K-ASC-2026-X
             </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.2 }}
+              className="mt-10"
+            >
+              <Link
+                href="/resources"
+                className="px-8 py-4 bg-(--accent-glow) text-white font-heading font-black tracking-widest text-sm rounded-full hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,69,0,0.3)] inline-block"
+              >
+                RESOURCES TO THE NEXT QUALIFICATION ROUND
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
