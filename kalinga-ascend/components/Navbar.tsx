@@ -12,12 +12,13 @@ import ThemeToggle from './ThemeToggle';
 
 // Full Project Page List (14 Pages)
 const NAV_LINKS = [
+    { name: 'RESOURCES', href: '/resources' },
     { name: 'MISSION OVERVIEW', href: '/mission' },
     { name: 'SYSTEM ARCHITECTURE', href: '/architecture' },
     { name: 'TESTING HIERARCHY', href: '/testing' },
     { name: 'SPECIFICATIONS', href: '/specs' },
     { name: 'MANAGEMENT', href: '/management' },
-    { name: 'NOVELTY & IMPACT', href: '/novelty' },
+    { name: 'NOVELTY & IMPACT', href: '/novelty' }, 
     { name: 'COMPONENTS', href: '/components' },
     { name: 'REALIZATION', href: '/realization' },
     { name: '3D DIAGRAM', href: '/3d-diagram' },
@@ -26,7 +27,6 @@ const NAV_LINKS = [
     { name: 'ANALYSIS', href: '/analysis' },
     { name: 'BASE STATION', href: '/basestation' },
     { name: 'UAV SENSORS', href: '/sensors' },
-    { name: 'RESOURCES', href: '/resources' },
 ];
 
 export default function Navbar() {
