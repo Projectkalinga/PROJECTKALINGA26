@@ -27,7 +27,7 @@ const resources = [
         title: "3. Project Drive Folder",
         description: "This folder contains the high-resolution design write-ups, CAD models, and additional technical documentation.",
         type: 'link',
-        link: '#', // Placeholder - User to provide
+        link: 'https://drive.google.com/file/d/1PaWHwIbDw_O7TeRT1yCbC7PtMFT7a8dv/view?usp=drive_link',
         label: "Project Kalinga Drive Folder",
         icon: FolderOpen
     },
