@@ -145,6 +145,47 @@ export default function ResourcesPage() {
                     ))}
                 </div>
 
+                {/* PDF Embed Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mb-20"
+                >
+                    <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
+                        <div>
+                            <h2 className="text-2xl font-heading font-black tracking-tight flex items-center gap-3">
+                                <FileText className="w-6 h-6 text-(--accent-glow)" />
+                                OFFICIAL MISSION DOSSIER
+                            </h2>
+                            <p className="text-xs text-(--text-secondary) font-mono mt-1 opacity-70 uppercase tracking-widest">
+                                Comprehensive Technical Proposal & Strategic Overview
+                            </p>
+                        </div>
+                        <a 
+                            href="/resources/KALINGA1 (1).pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-6 py-2 border border-white/10 rounded-full text-[10px] font-black tracking-widest hover:bg-white/5 transition-colors flex items-center gap-2"
+                        >
+                            OPEN IN NEW TAB <ExternalLink className="w-3 h-3" />
+                        </a>
+                    </div>
+                    
+                    <div className="glass-panel p-2 md:p-4 bg-black/40 border-white/5 overflow-hidden group">
+                        <div className="relative w-full h-[500px] md:h-[800px] rounded-sm overflow-hidden bg-zinc-900 shadow-2xl">
+                            {/* PDF Overlay Hint for interactive feel */}
+                            <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-(--accent-glow)/50 to-transparent z-20 animate-pulse" />
+                            
+                            <iframe 
+                                src="/resources/KALINGA1 (1).pdf#toolbar=0"
+                                className="w-full h-full border-0"
+                                title="Mission Dossier"
+                            />
+                        </div>
+                    </div>
+                </motion.div>
+
                 {/* Local Downloads & Links Section */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
                     {/* Drive & Website Links */}
